@@ -8,8 +8,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +49,7 @@ public class ForecastFragment extends Fragment implements AsyncDelegate {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             FetchDataAsync dataFetch = new FetchDataAsync(this);
-            dataFetch.execute("94043");
+            dataFetch.execute("94608");
             publicWeatherList = dataFetch.publicWeatherString;
             return true;
         }
@@ -169,6 +171,16 @@ public class ForecastFragment extends Fragment implements AsyncDelegate {
         ListView listView = (ListView) rootView.findViewById(
                 R.id.listview_forecast);
         listView.setAdapter(mForecastAdapter);
+
+        //click listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String forecast = mForecastAdapter.getItem(position);
+                Toast.makeText(getActivity(), forecast, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rootView;
     }

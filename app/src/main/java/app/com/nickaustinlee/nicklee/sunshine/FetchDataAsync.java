@@ -68,7 +68,7 @@ public class FetchDataAsync extends AsyncTask<String, Void, String[]> {
         String forecastJsonStr = null;
 
         String format = "json";
-        String units = "metric";
+        String units = "imperial";
         int numDays = 7;
 
         try {
